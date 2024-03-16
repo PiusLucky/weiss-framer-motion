@@ -3,7 +3,7 @@ Weiss german website built with Next14, Shadcn, Framer motion and Tailwind.
 
 # Youtube
 Part 1:
-In Progress
+https://youtu.be/mehKCEp5tFU
 
 Part 2:
 https://www.youtube.com/watch?v=BOUvaQZ80pk
