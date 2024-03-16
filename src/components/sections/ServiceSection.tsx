@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import ServiceCard from "../cards/ServiceCard";
 
 function ServiceSection() {
@@ -22,8 +24,11 @@ function ServiceSection() {
         "Bei Ausführung sämtlicher vermessungstechnischer Aufgaben im Leistungsbild „Ent­wurfs­vermessung“ sind wir ein leistungsstarker Partner.",
     },
   ];
+
+  const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: false });
+
   return (
-    <section className="md:mt-[8rem]">
+    <section ref={ref} className="md:mt-[8rem]">
       <div>
         <p className="text-[24px] font-bold text-darkBlue">
           Unsere Dienstleistungen
@@ -35,9 +40,19 @@ function ServiceSection() {
           Rundum-Service mit:
         </p>
       </div>
-      <div className="flex justify-between flex-wrap gap-8 md:gap-32 jusa">
+      <div className="flex justify-between flex-wrap gap-8 md:gap-32">
         {data.map((service, index) => (
-          <ServiceCard {...service} key={index} />
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{
+              opacity: inView ? 1 : 0,
+              y: inView ? 0 : 20,
+            }}
+            transition={{ duration: 0.5, delay: 0.5 * index }}
+          >
+            <ServiceCard {...service} />
+          </motion.div>
         ))}
       </div>
     </section>

@@ -1,5 +1,7 @@
 import React from "react";
 import MainButton from "../common/MainButton";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import InfoCard from "../cards/InfoCard";
 
 function InfoSection() {
@@ -20,8 +22,14 @@ function InfoSection() {
         "Facilisi id mus at pulvinar vitae, ornare vitae scelerisque. Lacus egestas augue cursus aliquam nulla. Sed erat a scelerisque neque...",
     },
   ];
+
+  const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: false });
+
   return (
-    <section className="mt-8  bg-white px-4 md:px-[10rem] py-32 md:pb-[15rem] md:mt-[3rem]">
+    <section
+      className="mt-8  bg-white px-4 md:px-[10rem] py-32 md:pb-[15rem] md:mt-[3rem]"
+      ref={ref}
+    >
       <div className="flex justify-between flex-col md:flex-row md:items-end gap-8">
         <div>
           <p className="text-[24px] font-bold text-darkBlue mb-4">
@@ -50,7 +58,16 @@ function InfoSection() {
 
         <div className="flex justify-between flex-wrap gap-8">
           {data.map((info, index) => (
-            <InfoCard {...info} key={index} />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: inView ? 1 : 0,
+                y: inView ? 0 : 20,
+              }}
+              transition={{ duration: 0.5, delay: 0.5 * index }}
+            >
+              <InfoCard {...info} key={index} />
+            </motion.div>
           ))}
         </div>
       </div>

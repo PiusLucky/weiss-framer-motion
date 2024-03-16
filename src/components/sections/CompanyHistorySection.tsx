@@ -1,11 +1,15 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
 
 function CompanyHistorySection() {
+  const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: false });
+
   return (
-    <section className="mt-16 md:mt-[168px]">
-      <div className="bg-darkBlue p-8 md:p-[98px] md:max-w-[1009px] relative">
+    <section ref={ref} className="mt-16 md:mt-[168px]">
+      <motion.div className="bg-darkBlue p-8 md:p-[98px] md:max-w-[1009px] relative">
         <p className="text-[14px] font-bold uppercase text-lightBlue">
           Unsere Firmenhistorie
         </p>
@@ -26,10 +30,18 @@ function CompanyHistorySection() {
           Lesen Sie weiter <ChevronRight />
         </div>
 
-        <div className="hidden md:block absolute right-[-18rem] top-8">
+        <motion.div
+          initial={{ scale: 0.5, rotate: "-90deg" }}
+          animate={{
+            scale: inView ? 1 : 0.5,
+            rotate: inView ? "0deg" : "-90deg",
+          }}
+          transition={{ duration: 0.5 }}
+          className="hidden md:block absolute right-[-18rem] top-8"
+        >
           <img src="/images/b_1.png" alt="history image" />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

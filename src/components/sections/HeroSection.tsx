@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import MainButton from "../common/MainButton";
 
 function HeroSection() {
+  const [allowRotation, setAllowRotation] = useState(false);
   return (
     <section className="pt-32 px-4 md:px-[10rem] md:pt-16 flex flex-col gap-8 md:flex-row justify-between items-center bg-white">
       <div className="">
-        <p className="text-lightBlue font-bold uppercase">
+        <p className="text-lightBlue font-bold uppercase ">
           Ingenieur Dieter Weiss
         </p>
-        <p className="text-darkBlue font-bold my-4 text-[32px]">
+        <p
+          className={`text-darkBlue font-bold my-4  text-[32px] ${
+            allowRotation ? "text-gradient" : ""
+          }`}
+        >
           Ingenieurbüro für Bau- und Vermessungswesen
         </p>
         <p className="text-lightBlue text-[18px] font-medium mb-[38px]">
@@ -22,11 +28,33 @@ function HeroSection() {
         />
       </div>
       <div className="md:-mb-32 relative">
-        <img src="/images/hero.png" alt="hero image" />
+        <motion.img
+          initial={{ y: "50%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          src="/images/hero.png"
+          alt="hero image"
+          onHoverStart={() => {
+            setAllowRotation(true);
+          }}
+          onHoverEnd={() => {
+            setAllowRotation(false);
+          }}
+        />
 
-        <div className="absolute top-5 left-5 cursor-pointer">
-          <img src="/images/hero_icon.png" alt="hero icon" />
-        </div>
+        <motion.div
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="absolute top-5 left-5 cursor-pointer"
+        >
+          <motion.img
+            src="/images/hero_icon.png"
+            alt="hero icon"
+            animate={allowRotation ? { rotate: 360 } : {}}
+            transition={allowRotation ? { duration: 1, repeat: Infinity } : {}}
+          />
+        </motion.div>
       </div>
     </section>
   );
