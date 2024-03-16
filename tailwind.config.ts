@@ -18,6 +18,11 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        primary: "#FF9900",
+        lightBlue: "#929A9F",
+        darkBlue: "#263640"
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

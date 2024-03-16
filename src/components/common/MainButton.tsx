@@ -61,7 +61,7 @@ const MainButton = forwardRef<HTMLButtonElement, MainButtonProps>(
         form={form}
         className={`${
           isSecondaryVariant ? " text-white  bg-secondary" : "bg-primary"
-        } text-white shadow-xl ${propWidth} md:${propWidth}  select-none rounded-[0.625rem] hover:opacity-90 ${variant_hover} ${size_height} ${classes}`}
+        } text-white shadow-xl ${propWidth} md:${propWidth}  select-none rounded-[0] hover:opacity-90 ${variant_hover} ${size_height} ${classes}`}
         onClick={!disabled ? action : () => undefined}
         type={isSubmitable ? "submit" : "button"}
         ref={ref}
