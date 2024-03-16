@@ -59,6 +59,7 @@ function InfoSection() {
         <div className="flex justify-between flex-wrap gap-8">
           {data.map((info, index) => (
             <motion.div
+              key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{
                 opacity: inView ? 1 : 0,
@@ -66,7 +67,7 @@ function InfoSection() {
               }}
               transition={{ duration: 0.5, delay: 0.5 * index }}
             >
-              <InfoCard {...info} key={index} />
+              <InfoCard {...info} />
             </motion.div>
           ))}
         </div>
