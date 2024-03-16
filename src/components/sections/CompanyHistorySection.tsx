@@ -9,7 +9,7 @@ function CompanyHistorySection() {
 
   return (
     <section ref={ref} className="mt-16 md:mt-[168px]">
-      <motion.div className="bg-darkBlue p-8 md:p-[98px] md:max-w-[1009px] relative">
+      <div className="bg-darkBlue p-8 md:p-[98px] md:max-w-[1009px] relative">
         <p className="text-[14px] font-bold uppercase text-lightBlue">
           Unsere Firmenhistorie
         </p>
@@ -41,7 +41,7 @@ function CompanyHistorySection() {
         >
           <img src="/images/b_1.png" alt="history image" />
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
